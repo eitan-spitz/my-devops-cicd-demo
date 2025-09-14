@@ -43,7 +43,7 @@ jobs:
         IMAGE_TAG: ${{ env.version }}
       run: |
         # Build a docker container 
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/my-devops-cicd-demo:$IMAGE_TAG .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/my-devops-cicd-demo:$IMAGE_TAG ./docker/Dockerfile
 
     - name: push image
       env:
