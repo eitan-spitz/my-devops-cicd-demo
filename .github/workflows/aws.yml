@@ -31,17 +31,16 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Read version
+    - name: Read version # TODO: add script to update version based on cc
       id: get_version
       run: echo "version=$(cat VERSION)" >> $GITHUB_ENV
 
-    - name: Build image
+    - name: Build image # TODO add test stage after build to make sure it runs properly
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ env.version }}
       run: |
-        # Build a docker container 
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f docker/Dockerfile .
 
     - name: push image
